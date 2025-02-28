@@ -30,16 +30,16 @@ function App() {
   }, [])
 
   const tabs = [
-    { id: 'books', label: 'Books' },
-    { id: 'sales', label: 'Record Sale' },
-    { id: 'alerts', label: 'Alerts' }
+    { id: 'books', label: '本' },
+    { id: 'sales', label: '売上記録' },
+    { id: 'alerts', label: 'アラート' }
   ]
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Bookstore Inventory Management</h1>
-        <p className="text-gray-600">Manage your bookstore inventory efficiently</p>
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">本屋在庫管理システム</h1>
+        <p className="text-gray-600">本屋での書籍の在庫を管理するためのシステムです。書籍の入庫、販売、在庫数の管理を効率化し、欠品を防ぎます。</p>
       </header>
 
       <div className="mb-6">
@@ -49,8 +49,8 @@ function App() {
               <button
                 key={tab.id}
                 className={`py-4 px-6 font-medium text-sm ${activeTab === tab.id
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-b-2 border-blue-500 text-blue-600'
+                  : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 onClick={() => setActiveTab(tab.id)}
               >
@@ -68,7 +68,7 @@ function App() {
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <p className="text-gray-500">Loading...</p>
+          <p className="text-gray-500">読み込み中...</p>
         </div>
       ) : (
         <div className="mt-6">

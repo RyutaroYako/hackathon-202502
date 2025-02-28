@@ -24,7 +24,7 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
     e.preventDefault();
 
     if (!formData.bookId || !formData.quantity) {
-      toast.error('Please select a book and quantity');
+      toast.error('本と数量を選択してください');
       return;
     }
 
@@ -32,10 +32,10 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
       setLoading(true);
       const response = await recordSale(formData.bookId, Number(formData.quantity));
 
-      toast.success('Sale recorded successfully');
+      toast.success('売上を正常に記録しました');
 
       if (response.isLowStock) {
-        toast.error(`Warning: Stock for this book is now below threshold (${response.updatedStock} remaining)`);
+        toast.error(`アラート: この本の在庫が閾値を下回りました (残り${response.updatedStock}冊)`);
       }
 
       setFormData({
@@ -46,9 +46,9 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
       onSaleRecorded();
     } catch (error: any) {
       if (error.response?.data?.message === 'Insufficient stock') {
-        toast.error('Insufficient stock for this sale');
+        toast.error('在庫が不足しています');
       } else {
-        toast.error('Failed to record sale');
+        toast.error('売上の記録に失敗しました');
       }
       console.error(error);
     } finally {
@@ -61,15 +61,15 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4">Record Sale</h2>
+      <h2 className="text-xl font-semibold mb-4">売上を記録</h2>
 
       {availableBooks.length === 0 ? (
-        <p className="text-gray-500 text-center py-4">No books available for sale</p>
+        <p className="text-gray-500 text-center py-4">売却可能な本がありません</p>
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="bookId">
-              Book
+              本
             </label>
             <select
               id="bookId"
@@ -79,10 +79,10 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
               className="input"
               required
             >
-              <option value="">Select a book</option>
+              <option value="">本を選択</option>
               {availableBooks.map(book => (
                 <option key={book.id} value={book.id}>
-                  {book.title} - ${book.price.toFixed(2)} ({book.stock} in stock)
+                  {book.title} - ¥{book.price.toFixed(2)} (在庫: {book.stock}冊)
                 </option>
               ))}
             </select>
@@ -90,7 +90,7 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
 
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="quantity">
-              Quantity
+              数量
             </label>
             <input
               type="number"
@@ -110,7 +110,7 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
             className="btn btn-primary w-full"
             disabled={loading || !formData.bookId}
           >
-            {loading ? 'Processing...' : 'Record Sale'}
+            {loading ? '処理中...' : '売上を記録'}
           </button>
         </form>
       )}

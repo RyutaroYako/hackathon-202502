@@ -61,11 +61,11 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4">Add New Book</h2>
+      <h2 className="text-xl font-semibold mb-4">新しい本を追加</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-            Title
+            タイトル
           </label>
           <input
             type="text"
@@ -74,14 +74,14 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
             value={formData.title}
             onChange={handleChange}
             className="input"
-            placeholder="Book title"
+            placeholder="本のタイトル"
             required
           />
         </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="author">
-            Author
+            著者
           </label>
           <input
             type="text"
@@ -90,14 +90,14 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
             value={formData.author}
             onChange={handleChange}
             className="input"
-            placeholder="Author name"
+            placeholder="著者名"
             required
           />
         </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
-            Price
+            価格
           </label>
           <input
             type="number"
@@ -106,7 +106,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
             value={formData.price}
             onChange={handleChange}
             className="input"
-            placeholder="Price"
+            placeholder="価格"
             min="0"
             step="0.01"
             required
@@ -131,7 +131,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="stock">
-            Stock
+            在庫数
           </label>
           <input
             type="number"
@@ -140,7 +140,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
             value={formData.stock}
             onChange={handleChange}
             className="input"
-            placeholder="Current stock"
+            placeholder="在庫数"
             min="0"
             required
           />
@@ -148,7 +148,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="threshold">
-            Alert Threshold
+            アラート閾値
           </label>
           <input
             type="number"
@@ -168,7 +168,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
           className="btn btn-primary w-full"
           disabled={loading}
         >
-          {loading ? 'Adding...' : 'Add Book'}
+          {loading ? '追加中...' : '本を追加'}
         </button>
       </form>
     </div>

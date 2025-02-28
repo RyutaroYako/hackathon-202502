@@ -25,8 +25,8 @@ const AlertList = ({ alerts }: AlertListProps) => {
               <div>
                 <h3 className="font-semibold">{alert.title}</h3>
                 <p className="text-sm">
-                  Current stock: <span className="font-medium text-red-600">{alert.stock}</span>
-                  {' '}- Threshold: <span className="font-medium">{alert.threshold}</span>
+                  残りの在庫数: <span className="font-medium text-red-600">{alert.stock}</span>
+                  {' '}- 閾値: <span className="font-medium">{alert.threshold}</span>
                 </p>
               </div>
               <div className="text-yellow-800 bg-yellow-50 px-2 py-1 rounded text-sm font-medium">
@@ -38,8 +38,7 @@ const AlertList = ({ alerts }: AlertListProps) => {
       </div>
       <div className="mt-4 p-4 bg-blue-50 text-blue-700 rounded">
         <p className="text-sm">
-          <strong>Note:</strong> Books with stock levels at or below their threshold are shown here.
-          Consider restocking these items soon to avoid stockouts.
+          <strong>注意:</strong> 在庫数が閾値以下の書籍がここに表示されています。在庫切れを避けるため、これらの商品はお早めに補充をご検討ください。
         </p>
       </div>
     </div>
