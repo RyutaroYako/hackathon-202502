@@ -124,7 +124,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
             value={formData.isbn}
             onChange={handleChange}
             className="input"
-            placeholder="ISBN code"
+            placeholder="ISBN コード"
             required
           />
         </div>
@@ -157,7 +157,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
             value={formData.threshold}
             onChange={handleChange}
             className="input"
-            placeholder="Alert threshold"
+            placeholder="アラート閾値"
             min="0"
             required
           />

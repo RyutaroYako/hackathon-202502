@@ -9,7 +9,7 @@ const AlertList = ({ alerts }: AlertListProps) => {
     return (
       <div className="card">
         <div className="p-4 text-center text-gray-500">
-          No alerts at this time. All books are above their threshold levels.
+          現在アラートはありません。すべての書籍は閾値を上回っています。
         </div>
       </div>
     );
@@ -17,10 +17,10 @@ const AlertList = ({ alerts }: AlertListProps) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4">Low Stock Alerts</h2>
-      <div className="space-y-4">
+      <h2 className="text-xl font-semibold mb-4">在庫不足アラート</h2>
+      <div className="space-y-4 rounded-lg overflow-hidden shadow-lg">
         {alerts.map(alert => (
-          <div key={alert.id} className="alert alert-warning">
+          <div key={alert.id} className="alert alert-warning rounded-lg border-l-4 border-yellow-500">
             <div className="flex justify-between items-center">
               <div>
                 <h3 className="font-semibold">{alert.title}</h3>
@@ -30,13 +30,13 @@ const AlertList = ({ alerts }: AlertListProps) => {
                 </p>
               </div>
               <div className="text-yellow-800 bg-yellow-50 px-2 py-1 rounded text-sm font-medium">
-                Low Stock
+                在庫不足
               </div>
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-4 p-4 bg-blue-50 text-blue-700 rounded">
+      <div className="mt-4 p-4 bg-blue-50 text-blue-700 rounded-lg border-l-4 border-blue-500 shadow">
         <p className="text-sm">
           <strong>注意:</strong> 在庫数が閾値以下の書籍がここに表示されています。在庫切れを避けるため、これらの商品はお早めに補充をご検討ください。
         </p>

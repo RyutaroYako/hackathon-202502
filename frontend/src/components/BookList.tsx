@@ -38,24 +38,24 @@ const BookList = ({ books, onUpdate, compact = false }: BookListProps) => {
         stock: Number(editFormData.stock),
         threshold: Number(editFormData.threshold)
       });
-      toast.success('Book updated successfully');
+      toast.success('書籍情報を更新しました');
       setEditingBook(null);
       onUpdate();
     } catch (error) {
-      toast.error('Failed to update book');
+      toast.error('書籍情報の更新に失敗しました');
       console.error(error);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this book?')) return;
+    if (!confirm('この本を削除してもよろしいですか？')) return;
 
     try {
       await deleteBook(id);
-      toast.success('Book deleted successfully');
+      toast.success('書籍を削除しました');
       onUpdate();
     } catch (error) {
-      toast.error('Failed to delete book');
+      toast.error('書籍の削除に失敗しました');
       console.error(error);
     }
   };
@@ -63,77 +63,77 @@ const BookList = ({ books, onUpdate, compact = false }: BookListProps) => {
   if (books.length === 0) {
     return (
       <div className="card">
-        <p className="text-gray-500 text-center py-4">No books available</p>
+        <p className="text-gray-500 text-center py-4">登録された書籍がありません</p>
       </div>
     );
   }
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4">Book Inventory</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Title
+      <h2 className="text-xl font-semibold mb-4">書籍在庫一覧</h2>
+      <div className="overflow-x-auto rounded-lg shadow-lg">
+        <table className="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden">
+          <thead style={{ backgroundColor: '#206AF4', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+            <tr className="border-b-2 border-white">
+              <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-white tracking-wider">
+                タイトル
               </th>
               {!compact && (
                 <>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Author
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-white tracking-wider">
+                    著者
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Price
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-white tracking-wider">
+                    価格
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-white tracking-wider">
                     ISBN
                   </th>
                 </>
               )}
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Stock
+              <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-white tracking-wider">
+                在庫数
               </th>
               {!compact && (
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Threshold
+                <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-white tracking-wider">
+                  閾値
                 </th>
               )}
-              <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
+              <th scope="col" className="px-6 py-4 text-right text-xs font-medium text-white tracking-wider">
+                操作
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {books.map(book => (
-              <tr key={book.id}>
-                <td className="px-6 py-4 whitespace-nowrap">
+              <tr key={book.id} className="hover:bg-gray-50 transition-colors duration-150">
+                <td className="px-6 py-5 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">{book.title}</div>
                 </td>
                 {!compact && (
                   <>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-5 whitespace-nowrap">
                       <div className="text-sm text-gray-500">{book.author}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-5 whitespace-nowrap">
                       <div className="text-sm text-gray-500">${book.price.toFixed(2)}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-5 whitespace-nowrap">
                       <div className="text-sm text-gray-500">{book.isbn}</div>
                     </td>
                   </>
                 )}
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-5 whitespace-nowrap">
                   <div className={`text-sm font-medium ${book.stock <= book.threshold ? 'text-red-600' : 'text-gray-900'}`}>
                     {book.stock}
                   </div>
                 </td>
                 {!compact && (
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-5 whitespace-nowrap">
                     <div className="text-sm text-gray-500">{book.threshold}</div>
                   </td>
                 )}
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td className="px-6 py-5 whitespace-nowrap text-right text-sm font-medium">
                   {editingBook?.id === book.id ? (
                     <form onSubmit={handleUpdate} className="flex space-x-2">
                       <input
@@ -156,20 +156,20 @@ const BookList = ({ books, onUpdate, compact = false }: BookListProps) => {
                           required
                         />
                       )}
-                      <button type="submit" className="text-blue-600 hover:text-blue-900">
-                        Save
+                      <button type="submit" className="text-white px-2 py-1 rounded" style={{ backgroundColor: '#206AF4' }}>
+                        保存
                       </button>
-                      <button type="button" onClick={() => setEditingBook(null)} className="text-gray-600 hover:text-gray-900">
-                        Cancel
+                      <button type="button" onClick={() => setEditingBook(null)} className="text-gray-600 hover:text-gray-900 px-2 py-1 rounded">
+                        キャンセル
                       </button>
                     </form>
                   ) : (
                     <div className="flex space-x-2 justify-end">
-                      <button onClick={() => handleEdit(book)} className="text-blue-600 hover:text-blue-900">
-                        Edit
+                      <button onClick={() => handleEdit(book)} className="text-white px-2 py-1 rounded" style={{ backgroundColor: '#206AF4' }}>
+                        編集
                       </button>
-                      <button onClick={() => handleDelete(book.id)} className="text-red-600 hover:text-red-900">
-                        Delete
+                      <button onClick={() => handleDelete(book.id)} className="text-white px-2 py-1 rounded bg-red-600 hover:bg-red-700">
+                        削除
                       </button>
                     </div>
                   )}
