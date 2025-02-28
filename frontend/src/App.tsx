@@ -5,6 +5,7 @@ import BookForm from './components/BookForm'
 import BookList from './components/BookList'
 import SaleForm from './components/SaleForm'
 import AlertList from './components/AlertList'
+import { FaBook, FaShoppingCart, FaBell, FaStore } from 'react-icons/fa'
 
 function App() {
   const [books, setBooks] = useState<Book[]>([])
@@ -30,16 +31,18 @@ function App() {
   }, [])
 
   const tabs = [
-    { id: 'books', label: '本' },
-    { id: 'sales', label: '売上記録' },
-    { id: 'alerts', label: 'アラート' }
+    { id: 'books', label: '本', icon: <FaBook className="mr-2" /> },
+    { id: 'sales', label: '売上記録', icon: <FaShoppingCart className="mr-2" /> },
+    { id: 'alerts', label: 'アラート', icon: <FaBell className="mr-2" /> }
   ]
 
   return (
     <div>
       <header className="header mb-8" style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
         <div className="container mx-auto px-4 max-w-7xl">
-          <h1 className="text-3xl font-bold mb-2">本屋在庫管理システム</h1>
+          <h1 className="text-3xl font-bold mb-2 flex items-center">
+            <FaStore className="mr-3" size={30} /> 本屋在庫管理システム
+          </h1>
           <p className="text-white text-opacity-90">本屋での書籍の在庫を管理するためのシステムです。書籍の入庫、販売、在庫数の管理を効率化し、欠品を防ぎます。</p>
         </div>
       </header>
@@ -59,7 +62,10 @@ function App() {
                   style={activeTab === tab.id ? { backgroundColor: '#206AF4' } : {}}
                   onClick={() => setActiveTab(tab.id)}
                 >
-                  {tab.label}
+                  <div className="flex items-center">
+                    {tab.icon}
+                    {tab.label}
+                  </div>
                   {tab.id === 'alerts' && alerts.length > 0 && (
                     <span className="ml-2 bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">
                       {alerts.length}

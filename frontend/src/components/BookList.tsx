@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Book } from '../types';
 import { deleteBook, updateBook } from '../api';
 import { toast } from 'react-hot-toast';
+import { FaEdit, FaTrash, FaSave, FaTimes, FaBook } from 'react-icons/fa';
 
 interface BookListProps {
   books: Book[];
@@ -70,7 +71,9 @@ const BookList = ({ books, onUpdate, compact = false }: BookListProps) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4">書籍在庫一覧</h2>
+      <h2 className="text-xl font-semibold mb-4 flex items-center">
+        <FaBook className="mr-2 text-blue-600" size={20} /> 書籍在庫一覧
+      </h2>
       <div className="overflow-x-auto rounded-lg shadow-lg">
         <table className="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden">
           <thead style={{ backgroundColor: '#206AF4', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
@@ -156,20 +159,20 @@ const BookList = ({ books, onUpdate, compact = false }: BookListProps) => {
                           required
                         />
                       )}
-                      <button type="submit" className="text-white px-2 py-1 rounded" style={{ backgroundColor: '#206AF4' }}>
-                        保存
+                      <button type="submit" className="text-white px-2 py-1 rounded flex items-center" style={{ backgroundColor: '#206AF4' }}>
+                        <FaSave className="mr-1" /> 保存
                       </button>
-                      <button type="button" onClick={() => setEditingBook(null)} className="text-gray-600 hover:text-gray-900 px-2 py-1 rounded">
-                        キャンセル
+                      <button type="button" onClick={() => setEditingBook(null)} className="text-gray-600 hover:text-gray-900 px-2 py-1 rounded flex items-center">
+                        <FaTimes className="mr-1" /> キャンセル
                       </button>
                     </form>
                   ) : (
                     <div className="flex space-x-2 justify-end">
-                      <button onClick={() => handleEdit(book)} className="text-white px-2 py-1 rounded" style={{ backgroundColor: '#206AF4' }}>
-                        編集
+                      <button onClick={() => handleEdit(book)} className="text-white px-2 py-1 rounded flex items-center" style={{ backgroundColor: '#206AF4' }}>
+                        <FaEdit className="mr-1" /> 編集
                       </button>
-                      <button onClick={() => handleDelete(book.id)} className="text-white px-2 py-1 rounded bg-red-600 hover:bg-red-700">
-                        削除
+                      <button onClick={() => handleDelete(book.id)} className="text-white px-2 py-1 rounded bg-red-600 hover:bg-red-700 flex items-center">
+                        <FaTrash className="mr-1" /> 削除
                       </button>
                     </div>
                   )}

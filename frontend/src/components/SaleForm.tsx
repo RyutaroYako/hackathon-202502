@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Book } from '../types';
 import { recordSale } from '../api';
 import { toast } from 'react-hot-toast';
+import { FaShoppingCart, FaBook, FaPlus, FaInfoCircle } from 'react-icons/fa';
 
 interface SaleFormProps {
   books: Book[];
@@ -61,15 +62,20 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4">売上を記録</h2>
+      <h2 className="text-xl font-semibold mb-4 flex items-center">
+        <FaShoppingCart className="mr-2 text-blue-600" size={20} /> 売上を記録
+      </h2>
 
       {availableBooks.length === 0 ? (
-        <p className="text-gray-500 text-center py-4">売却可能な本がありません</p>
+        <p className="text-gray-500 text-center py-4 flex flex-col items-center">
+          <FaInfoCircle className="text-blue-500 mb-2" size={24} />
+          売却可能な本がありません
+        </p>
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="bookId">
-              本
+            <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="bookId">
+              <FaBook className="mr-1 text-blue-600" /> 本
             </label>
             <select
               id="bookId"
@@ -89,8 +95,8 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="quantity">
-              数量
+            <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="quantity">
+              <FaPlus className="mr-1 text-blue-600" /> 数量
             </label>
             <input
               type="number"
@@ -110,7 +116,7 @@ const SaleForm = ({ books, onSaleRecorded }: SaleFormProps) => {
             className="btn btn-primary w-full"
             disabled={loading || !formData.bookId}
           >
-            {loading ? '処理中...' : '売上を記録'}
+            {loading ? '処理中...' : <span className="flex items-center justify-center"><FaShoppingCart className="mr-2" /> 売上を記録</span>}
           </button>
         </form>
       )}

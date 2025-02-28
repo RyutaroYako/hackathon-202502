@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createBook } from '../api';
 import { toast } from 'react-hot-toast';
+import { FaPlus, FaBook, FaUser, FaMoneyBillWave, FaBarcode, FaBoxOpen, FaBell } from 'react-icons/fa';
 
 interface BookFormProps {
   onBookAdded: () => void;
@@ -61,11 +62,13 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
 
   return (
     <div className="card">
-      <h2 className="text-xl font-semibold mb-4">新しい本を追加</h2>
+      <h2 className="text-xl font-semibold mb-4 flex items-center">
+        <FaPlus className="mr-2 text-blue-600" size={18} /> 新しい本を追加
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-            タイトル
+          <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="title">
+            <FaBook className="mr-1 text-blue-600" /> タイトル
           </label>
           <input
             type="text"
@@ -80,8 +83,8 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="author">
-            著者
+          <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="author">
+            <FaUser className="mr-1 text-blue-600" /> 著者
           </label>
           <input
             type="text"
@@ -96,8 +99,8 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
-            価格
+          <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="price">
+            <FaMoneyBillWave className="mr-1 text-blue-600" /> 価格
           </label>
           <input
             type="number"
@@ -114,8 +117,8 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="isbn">
-            ISBN
+          <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="isbn">
+            <FaBarcode className="mr-1 text-blue-600" /> ISBN
           </label>
           <input
             type="text"
@@ -130,8 +133,8 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="stock">
-            在庫数
+          <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="stock">
+            <FaBoxOpen className="mr-1 text-blue-600" /> 在庫数
           </label>
           <input
             type="number"
@@ -147,8 +150,8 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="threshold">
-            アラート閾値
+          <label className="text-gray-700 text-sm font-bold mb-2 flex items-center" htmlFor="threshold">
+            <FaBell className="mr-1 text-blue-600" /> アラート閾値
           </label>
           <input
             type="number"
@@ -168,7 +171,7 @@ const BookForm = ({ onBookAdded }: BookFormProps) => {
           className="btn btn-primary w-full"
           disabled={loading}
         >
-          {loading ? '追加中...' : '本を追加'}
+          {loading ? '追加中...' : <span className="flex items-center justify-center"><FaPlus className="mr-2" /> 本を追加</span>}
         </button>
       </form>
     </div>
